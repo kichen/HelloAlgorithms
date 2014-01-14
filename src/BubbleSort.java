@@ -1,8 +1,10 @@
+import org.junit.Ignore;
 import org.junit.Test;
 
 //测试数据基本上是从小到大排列的整数，为了体现三种算法的性能差别，将中间段部分数据挪到了相对靠后的位置
 public class BubbleSort {
 
+	@Ignore
 	@Test
 	public void testSort() {
 		Stopwatch stopwatch = new Stopwatch();
@@ -31,6 +33,7 @@ public class BubbleSort {
 
 	}
 
+	@Ignore
 	@Test
 	public void testSort1() {
 		Stopwatch stopwatch = new Stopwatch();

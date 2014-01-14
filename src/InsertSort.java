@@ -1,13 +1,27 @@
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 public class InsertSort {
+
+	private static In in;
+	private static int[] a;
+
+	@Before
+	public void init() {
+		in = new In("128Kints_R.txt");
+		a = in.readAllInts();
+	}
+
+	@After
+	public void destroy() {
+		in.close();
+	}
+
+	@Ignore
 	@Test
 	public void testSort() {
-		Stopwatch stopwatch = new Stopwatch();
-		In in = new In("128Kints.txt");
-		System.out.println(stopwatch.elapsedTime());
-		int a[] = in.readAllInts();
-		in.close();
 		sort(a);
 	}
 
@@ -15,27 +29,68 @@ public class InsertSort {
 		int n = a.length;
 		System.out.println("The sorted integers are:");
 		int i, j, k;
-		for (i = 1; i < n; i++)
-		{
-			//为a[i]在前面的a[0...i-1]有序区间中找一个合适的位置
+		for (i = 1; i < n; i++) {
 			for (j = i - 1; j >= 0; j--)
 				if (a[j] < a[i])
 					break;
 
-			//如找到了一个合适的位置
-			if (j != i - 1)
-			{
-				//将比a[i]大的数据向后移
+			if (j != i - 1) {
 				int temp = a[i];
 				for (k = i - 1; k > j; k--)
 					a[k + 1] = a[k];
-				//将a[i]放到正确位置上
 				a[k + 1] = temp;
 			}
 		}
 		for (i = 0; i < n; i++) {
 			System.out.println(a[i]);
 		}
+	}
 
+	@Test
+	public void testSort2() {
+		sort2(a);
+	}
+
+	public static void sort2(int a[]) {
+		int n = a.length;
+		System.out.println("The sorted integers are:");
+		int i, j;
+		for (i = 1; i < n; i++) {
+			// if (a[i] < a[i - 1]) {
+			int temp = a[i];
+			for (j = i - 1; j >= 0 && a[j] > temp; j--) {
+				a[j + 1] = a[j];
+			}
+			a[j + 1] = temp;
+			// }
+		}
+		for (i = 0; i < n; i++) {
+			System.out.println(a[i]);
+		}
+
+	}
+
+	@Ignore
+	@Test
+	public void testSort3() {
+		sort3(a);
+	}
+
+	public static void sort3(int a[]) {
+		int n = a.length;
+		System.out.println("The sorted integers are:");
+		int i, j;
+		for (i = 1; i < n; i++) {
+			if (a[i] < a[i - 1]) {
+				for (j = i - 1; j >= 0 && a[j] > a[j + 1]; j--) {
+					a[j + 1] ^= a[j];
+					a[j] ^= a[j + 1];
+					a[j + 1] ^= a[j];
+				}
+			}
+		}
+		for (i = 0; i < n; i++) {
+			System.out.println(a[i]);
+		}
 	}
 }
