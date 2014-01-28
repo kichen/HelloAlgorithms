@@ -8,7 +8,7 @@ public class BubbleSort {
 	@Test
 	public void testSort() {
 		Stopwatch stopwatch = new Stopwatch();
-		In in = new In("128Kints.txt");
+		In in = new In("128Kints_R.txt");
 		System.out.println(stopwatch.elapsedTime());
 		int a[] = in.readAllInts();
 		in.close();
@@ -37,7 +37,7 @@ public class BubbleSort {
 	@Test
 	public void testSort1() {
 		Stopwatch stopwatch = new Stopwatch();
-		In in = new In("128Kints.txt");
+		In in = new In("128Kints_R.txt");
 		System.out.println(stopwatch.elapsedTime());
 		int a[] = in.readAllInts();
 		in.close();
@@ -71,7 +71,7 @@ public class BubbleSort {
 	@Test
 	public void testSort2() {
 		Stopwatch stopwatch = new Stopwatch();
-		In in = new In("128Kints.txt");
+		In in = new In("128Kints_R.txt");
 		System.out.println(stopwatch.elapsedTime());
 		int a[] = in.readAllInts();
 		in.close();
@@ -79,29 +79,26 @@ public class BubbleSort {
 	}
 
 	// optimize2: record position
+	
 	public static void sort2(int a[]) {
 		int n = a.length;
 		System.out.println("The sorted integers are:");
-		boolean flag = false;
 		int pos = n;// pos
-		for (int i = 0; i < n - 1; i++) {
-			flag = false;
-			for (int j = 1; j < pos; j++) {
+		while (pos > 0) {
+			int k = pos;
+			pos = 0;
+			for (int j = 1; j < k; j++) {
 				if (a[j - 1] > a[j]) {
 					a[j - 1] ^= a[j];
 					a[j] ^= a[j - 1];
 					a[j - 1] ^= a[j];
-					flag = true;
 					pos = j;// update pos if sorting happens
 				}
 			}
-			if (flag == false)
-				break;
 		}
 		for (int i = 0; i < n; i++) {
 			System.out.println(a[i]);
 		}
-
 	}
 
 }
