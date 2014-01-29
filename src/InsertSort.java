@@ -10,7 +10,7 @@ public class InsertSort {
 
 	@Before
 	public void init() {
-		in = new In("tmp.txt");
+		in = new In("128Kints_R.txt");
 		a = in.readAllInts();
 	}
 

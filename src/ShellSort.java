@@ -8,7 +8,7 @@ public class ShellSort {
 
 	@Before
 	public void init() {
-		in = new In("tmp.txt");
+		in = new In("128Kints_R.txt");
 		a = in.readAllInts();
 	}
 
@@ -25,16 +25,12 @@ public class ShellSort {
 			int i, j;
 			for (i = gap; i < n; i++) {
 				int temp = a[i];
-				for (j = i - gap; j >= 0 && a[j] > a[i]; j -= gap) {
+				for (j = i - gap; j >= 0 && a[j] > temp; j -= gap) {
 					a[j + gap] = a[j];
 				}
 				a[j + gap] = temp;
 			}
 			gap /= 2;
-			for (int k = 0; k < n; k++) {
-				System.out.print(a[k]+",");
-			}
-			System.out.println();
 		}
 		for (int i = 0; i < n; i++) {
 			System.out.println(a[i]);
